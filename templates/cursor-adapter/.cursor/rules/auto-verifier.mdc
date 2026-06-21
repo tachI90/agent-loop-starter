@@ -1,0 +1,21 @@
+---
+description: "Automatically use the verifier subagent after meaningful code changes"
+alwaysApply: true
+---
+
+Use the Cursor verifier subagent proactively after meaningful code changes.
+
+The verifier should confirm that:
+
+- the Grill Gate was completed or explicitly skipped
+- the Goal Contract was approved before planning
+- the detailed Technical Implementation Plan was approved before editing
+- the approved goal was reached
+- every acceptance criterion is satisfied
+- non-goals were respected
+- approved interfaces, data shapes, and flows match the implementation
+- pitfalls and regression risks from the plan were addressed
+- configured checks meaningfully support the approved goal
+- loop guardrails were respected when repeated iterations were used
+
+If the subagent is unavailable, use the portable verifier skill from `.agents/skills/verifier/SKILL.md`.

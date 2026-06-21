@@ -1,0 +1,40 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check shell syntax
+        run: |
+          bash -n templates/portable-core/scripts/agent/check.sh
+          bash -n templates/portable-core/scripts/agent/find-skill.sh
+          bash -n templates/cursor-adapter/scripts/cursor/check.sh
+
+      - name: Ensure no local grill-me fallback exists
+        run: |
+          if find templates -path '*grill-me*' -print | grep .; then
+            echo "Do not ship a local grill-me skill. Use requirements-grill-lite as fallback."
+            exit 1
+          fi
+
+      - name: Check required template files
+        run: |
+          test -f templates/portable-core/AGENTS.md
+          test -f templates/portable-core/.agents/skills/ai-engineering-loop/SKILL.md
+          test -f templates/portable-core/.agents/skills/requirements-grill-lite/SKILL.md
+          test -f templates/portable-core/.agents/skills/verifier/SKILL.md
+          test -f templates/portable-core/.agents/skills/configure-project-checks/SKILL.md
+          test -f templates/portable-core/.agents/skills/discover-agent-skills/SKILL.md
+          test -f templates/portable-core/.agents/skills/loop-orchestrator/SKILL.md
+          test -f templates/portable-core/.agents/skills/anti-spin-guard/SKILL.md
+          test -f templates/cursor-adapter/.cursor/rules/engineering-loop.mdc
+          test -f templates/cursor-adapter/.cursor/agents/verifier.md
+          test -f templates/pi-adapter/.pi/settings.json

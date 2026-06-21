@@ -1,0 +1,14 @@
+---
+description: "Repository verification policy for Cursor agents"
+alwaysApply: true
+---
+
+Use this command as the default final local verification command:
+
+```bash
+bash scripts/agent/check.sh
+```
+
+The script is project-specific. Do not assume generic commands.
+
+If it is not configured, say verification is not configured and do not claim the work is verified.

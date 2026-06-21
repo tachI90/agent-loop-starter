@@ -1,0 +1,24 @@
+---
+description: "Strict Grill Gate before goal approval and technical planning"
+alwaysApply: true
+---
+
+For non-trivial work, complete a Grill Gate before producing a Goal Contract or Technical Implementation Plan.
+
+Ask at least one material question unless the user explicitly says to skip grilling.
+
+Before deciding `grill-me` is unavailable, search project, ancestor, user/global, admin, and configured skill scopes.
+
+If available, run:
+
+```bash
+bash scripts/agent/find-skill.sh grill-me
+```
+
+Use this preference order:
+
+1. real `grill-me`
+2. `requirements-grill-lite`
+3. inline Grill Gate protocol from `AGENTS.md`
+
+If questions are needed, stop and wait for the user's answer.

@@ -1,0 +1,10 @@
+---
+description: "Require human approval for Goal Contract and detailed Technical Implementation Plans"
+alwaysApply: true
+---
+
+For non-trivial changes, do not edit code until the user approves both the Goal Contract and the Technical Implementation Plan.
+
+The Technical Implementation Plan must follow the full template in `AGENTS.md`.
+
+It must cover architecture pattern, implementation flow, files and responsibilities, interfaces, schemas, request/response shapes, validation rules, data/control flow, Mermaid diagrams where useful, pitfalls, regressions, tests, and exact implementation steps.

@@ -1,0 +1,29 @@
+---
+description: "Default AI engineering loop for all meaningful code changes"
+alwaysApply: true
+---
+
+Follow the repository workflow in `AGENTS.md`.
+
+For non-trivial work, do not create a Technical Implementation Plan until the Grill Gate is complete and the Goal Contract is approved by the user.
+
+Required order:
+
+1. Grill Gate
+2. Goal Contract
+3. Human Goal Approval
+4. Technical Implementation Plan
+5. Human Plan Approval
+6. Loop Execution Contract, when repeated autonomous iterations are needed
+7. Implementation Loop
+8. Checks
+9. Verifier
+
+If the Grill Gate needs questions, ask them and stop.
+
+After the Goal Contract is approved, create a detailed Technical Implementation Plan using the full template in `AGENTS.md`.
+
+After the technical plan is approved, continue the implementation/check/fix loop until the approved goal is reached or blocked.
+
+
+For repeated autonomous work, require a Loop Execution Contract with max iterations, budget, progress signal, no-progress rule, repeated-failure rule, flip-flop rule, verification, and escalation.

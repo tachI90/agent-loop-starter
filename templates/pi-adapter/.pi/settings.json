@@ -1,0 +1,7 @@
+{
+  "enableSkillCommands": true,
+  "skills": [
+    ".agents/skills",
+    ".pi/skills"
+  ]
+}
