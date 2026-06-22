@@ -92,42 +92,44 @@ Ask for approval before editing code.
 
 ## Loop Execution Contract
 
-Before repeated autonomous iterations, scheduled/background execution, or long-running implementation/check/fix cycles, create:
+1. Before repeated autonomous iterations, scheduled/background execution, or long-running implementation/check/fix cycles, create a Loop Execution Contract:
 
-```text
-## Loop Execution Contract
+   ```text
+   ## Loop Execution Contract
 
-Mode:
-Goal | Loop | Routine
+   Mode:
+   Goal | Loop | Routine
 
-Trigger:
-Manual | interval | schedule | event
+   Trigger:
+   Manual | interval | schedule | event
 
-Max iterations:
-Budget:
-State file:
-Progress signal:
-No-progress rule:
-Repeated-failure rule:
-Flip-flop rule:
-Verification:
-Escalation:
-Completion:
-```
+   Max iterations:
+   Budget:
+   State file:
+   Progress signal:
+   No-progress rule:
+   Repeated-failure rule:
+   Flip-flop rule:
+   Verification:
+   Escalation:
+   Completion:
+   ```
 
-Do not run unbounded loops. Use `anti-spin-guard` during repeated iterations.
+2. Do not run unbounded loops. Use `anti-spin-guard` during repeated iterations.
 
 ## Implementation loop
 
 After plan approval:
 
-1. Implement the smallest correct change.
-2. Run `bash scripts/agent/check.sh`.
-3. Compare the result against the approved Goal Contract and Technical Implementation Plan.
-4. Fix failures or gaps.
-5. Stop after 3 failed attempts and ask for guidance.
-6. Run `anti-spin-guard` when iterations repeat.
-7. Continue until the approved goal is reached or blocked.
+<!-- markdownlint-disable MD029 -->
+3. Implement the smallest correct change.
+4. Run `bash scripts/agent/check.sh`.
+5. Compare the result against the approved Goal Contract and Technical Implementation Plan.
+6. Fix failures or gaps.
+7. Stop after 3 failed attempts and ask for guidance.
+8. Run `anti-spin-guard` when iterations repeat.
+9. Continue until the approved goal is reached or blocked.
+<!-- markdownlint-enable MD029 -->
 
 If implementation reveals a missing interface, schema, migration, API contract, validation rule, architectural decision, or data/control flow, stop and update the Technical Implementation Plan for approval before continuing.
 
