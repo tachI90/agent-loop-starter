@@ -18,6 +18,9 @@ Required order:
 7. Implementation Loop
 8. Checks
 9. Verifier
+10. Changeset Review Loop
+11. Human Review and Approval
+12. Pull Request Creation, unless skipped
 
 If the Grill Gate needs questions, ask them and stop.
 
@@ -25,5 +28,8 @@ After the Goal Contract is approved, create a detailed Technical Implementation 
 
 After the technical plan is approved, continue the implementation/check/fix loop until the approved goal is reached or blocked.
 
-
 For repeated autonomous work, require a Loop Execution Contract with max iterations, budget, progress signal, no-progress rule, repeated-failure rule, flip-flop rule, verification, and escalation.
+
+Before human review, run the Changeset Review Loop. Use three reviewer subagents, then a fixer subagent. Repeat until no `CRITICAL` findings remain or three iterations are reached.
+
+After human approval, create a pull request with `gh` or `bkt` when available, unless the user asks to skip PR creation.

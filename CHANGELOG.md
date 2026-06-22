@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.5.0
+
+Adds update instructions for repositories that already have an older Agent Loop Starter installed.
+
+Includes:
+
+- `UPDATE_WITH_AGENT.md`
+- `prompts/update-existing-install.md`
+- `docs/updating.md`
+- README update section
+- installation docs link to update flow
+- validation checks for update documentation
+
+## 0.4.0
+
+Adds the post-verifier Changeset Review Loop and post-approval PR creation gate.
+
+Includes:
+
+- `changeset-review-loop` skill.
+- `pull-request-creator` skill.
+- Cursor changeset reviewer subagents for architecture, correctness, and regression review.
+- Cursor changeset fixer subagent.
+- Cursor rule for the Changeset Review Loop.
+- Documentation for changeset review and pull request creation.
+- Workflow updates so PR creation happens after human approval and can be skipped by user request.
+
 ## 0.3.0
 
 Replaces the root install script with agent-facing install prompts.

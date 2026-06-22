@@ -27,6 +27,9 @@ jobs:
 
       - name: Check required template files
         run: |
+          test -f UPDATE_WITH_AGENT.md
+          test -f prompts/update-existing-install.md
+          test -f docs/updating.md
           test -f templates/portable-core/AGENTS.md
           test -f templates/portable-core/.agents/skills/ai-engineering-loop/SKILL.md
           test -f templates/portable-core/.agents/skills/requirements-grill-lite/SKILL.md
@@ -35,6 +38,13 @@ jobs:
           test -f templates/portable-core/.agents/skills/discover-agent-skills/SKILL.md
           test -f templates/portable-core/.agents/skills/loop-orchestrator/SKILL.md
           test -f templates/portable-core/.agents/skills/anti-spin-guard/SKILL.md
+          test -f templates/portable-core/.agents/skills/changeset-review-loop/SKILL.md
+          test -f templates/portable-core/.agents/skills/pull-request-creator/SKILL.md
           test -f templates/cursor-adapter/.cursor/rules/engineering-loop.mdc
+          test -f templates/cursor-adapter/.cursor/rules/changeset-review-loop.mdc
           test -f templates/cursor-adapter/.cursor/agents/verifier.md
+          test -f templates/cursor-adapter/.cursor/agents/changeset-reviewer-architecture.md
+          test -f templates/cursor-adapter/.cursor/agents/changeset-reviewer-correctness.md
+          test -f templates/cursor-adapter/.cursor/agents/changeset-reviewer-regression.md
+          test -f templates/cursor-adapter/.cursor/agents/changeset-fixer.md
           test -f templates/pi-adapter/.pi/settings.json

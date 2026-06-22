@@ -16,7 +16,9 @@ For meaningful code changes:
 8. Continue the implementation/check/fix loop until the approved goal is reached or you are blocked.
 9. Run relevant checks.
 10. Use the verifier before claiming completion.
-11. Prepare the change for human diff review.
+11. Run the Changeset Review Loop.
+12. Prepare the change for human review.
+13. After human approval, create a pull request unless the user asks to skip PR creation.
 
 ## Strict Grill Gate
 
@@ -222,6 +224,8 @@ Use these skills when available:
 - `grill-me`, when the real upstream skill exists
 - `requirements-grill-lite`, only as fallback
 - `verifier`
+- `changeset-review-loop`
+- `pull-request-creator`
 - `loop-orchestrator`
 - `anti-spin-guard`
 - `configure-project-checks`
@@ -244,6 +248,51 @@ The verifier must check the implementation against the approved Goal Contract, t
 
 The verifier must also flag no-progress loops, repeated failures, flip-flopping between approaches, or missing budget/iteration caps.
 
+## Changeset Review Loop
+
+After local checks and verifier review, but before final human review, run a Changeset Review Loop.
+
+Use three independent reviewer perspectives:
+
+1. Architecture reviewer
+2. Correctness reviewer
+3. Regression reviewer
+
+Each reviewer must report findings with severity:
+
+```text
+CRITICAL | HIGH | MEDIUM | LOW | NIT
+```
+
+After the three reviewers report, use a fixer subagent or fixer pass to address actionable findings.
+
+Repeat the review/fix loop until either:
+
+1. no reviewer reports any `CRITICAL` findings, or
+2. three review/fix iterations have completed.
+
+If `CRITICAL` findings remain after three iterations, mark the work as blocked and do not present it as ready for human approval.
+
+Non-critical findings may remain, but they must be reported clearly for human review.
+
+Use the `changeset-review-loop` skill when available.
+
+## Human review and pull request gate
+
+After the Changeset Review Loop passes, present the work for human review.
+
+After the human approves the changes, create a pull request automatically unless the user asks to skip PR creation.
+
+The user can skip this step with `skip PR`, `do not create a PR`, `no PR`, or equivalent.
+
+For PR creation, prefer available tools in this order:
+
+1. `gh` for GitHub repositories.
+2. `bkt` for repositories that use that PR tool.
+3. Manual PR instructions if neither tool is available.
+
+Use the `pull-request-creator` skill when available.
+
 ## Local checks
 
 Use this command:
@@ -264,5 +313,7 @@ When finishing implementation work, include:
 - Files changed
 - Checks run
 - Verifier result
+- Changeset Review Loop result
 - Remaining risks
 - Whether it is ready for human review
+- Pull request status after human approval, if applicable

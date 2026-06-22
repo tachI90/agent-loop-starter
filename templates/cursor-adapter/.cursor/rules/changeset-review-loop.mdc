@@ -1,0 +1,25 @@
+---
+description: "Run three changeset reviewer subagents and one fixer before human review"
+alwaysApply: true
+---
+
+After implementation checks and verifier review, but before human review, run the Changeset Review Loop.
+
+Use these reviewer subagents when available:
+
+1. `changeset-reviewer-architecture`
+2. `changeset-reviewer-correctness`
+3. `changeset-reviewer-regression`
+
+Then use:
+
+4. `changeset-fixer`
+
+Repeat review and fix until either:
+
+- no reviewer reports any `CRITICAL` findings, or
+- three review/fix iterations have completed.
+
+If `CRITICAL` findings remain after three iterations, mark the work as blocked and do not present it as ready for human approval.
+
+Report remaining non-critical findings for human review.

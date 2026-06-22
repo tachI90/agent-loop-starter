@@ -1,6 +1,6 @@
 ---
 name: ai-engineering-loop
-description: "Use for meaningful software changes: grill, goal approval, technical plan approval, implementation, checks, verifier review."
+description: "Use for meaningful software changes: grill, goal approval, technical plan approval, implementation, checks, verifier review, changeset review, human approval, and PR creation."
 ---
 
 Use this skill as the default workflow for meaningful software development tasks.
@@ -16,7 +16,10 @@ Use this skill as the default workflow for meaningful software development tasks
 7. Implementation Loop
 8. Project Checks
 9. Verifier Review
-10. Final Summary
+10. Changeset Review Loop
+11. Human Review and Approval
+12. Pull Request Creation, unless skipped
+13. Final Summary
 
 Do not create a Technical Implementation Plan before the Grill Gate is complete and the Goal Contract is approved.
 Do not edit code before the Technical Implementation Plan is approved.
@@ -125,7 +128,7 @@ After plan approval:
 2. Run `bash scripts/agent/check.sh`.
 3. Compare the result against the approved Goal Contract and Technical Implementation Plan.
 4. Fix failures or gaps.
-5. Stop after 3 failed attempts and ask for guidance.
+5. Stop after 3 failed attempts and ask for human guidance.
 6. Run `anti-spin-guard` when iterations repeat.
 7. Continue until the approved goal is reached or blocked.
 
@@ -134,3 +137,42 @@ If implementation reveals a missing interface, schema, migration, API contract, 
 ## Verification
 
 Use the verifier before claiming completion.
+
+## Changeset Review Loop
+
+After project checks and verifier review, run the Changeset Review Loop before asking for final human review.
+
+Use three independent reviewer perspectives:
+
+1. Architecture reviewer
+2. Correctness reviewer
+3. Regression reviewer
+
+After the three reviewers report, use a fixer subagent or fixer pass to address actionable findings.
+
+Repeat until either:
+
+1. no reviewer reports `CRITICAL` findings, or
+2. three review/fix iterations have completed.
+
+If `CRITICAL` findings remain after three iterations, mark the work as blocked and do not present it as ready for human approval.
+
+Report remaining non-critical findings for human review.
+
+Use `changeset-review-loop` when available.
+
+## Human approval and pull request
+
+After the Changeset Review Loop passes, present the work for human review.
+
+After human approval, create a pull request automatically unless the user asks to skip PR creation.
+
+The user can skip this step with `skip PR`, `do not create a PR`, `no PR`, or equivalent.
+
+For PR creation, prefer available tools in this order:
+
+1. `gh` for GitHub repositories.
+2. `bkt` for repositories that use that PR tool.
+3. Manual PR instructions if neither tool is available.
+
+Use `pull-request-creator` when available.

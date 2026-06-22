@@ -14,7 +14,11 @@ Technical Implementation Plan
 Human Plan Approval
 Loop Execution Contract, if repeated autonomous iterations are needed
 Implementation / Check / Fix Loop
+Project Checks
 Verifier Review
+Changeset Review Loop
+Human Review and Approval
+Pull Request Creation, unless skipped
 ```
 
 Any repeated loop must have:
@@ -27,3 +31,16 @@ Any repeated loop must have:
 - flip-flop rule
 - verification
 - escalation
+
+The Changeset Review Loop runs before human review.
+
+It uses:
+
+1. Architecture reviewer
+2. Correctness reviewer
+3. Regression reviewer
+4. Fixer
+
+The review/fix loop stops when no `CRITICAL` findings remain or after three iterations.
+
+After human approval, the agent should create a pull request with `gh` or `bkt` when available, unless the user asks to skip PR creation.

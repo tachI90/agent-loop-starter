@@ -28,6 +28,9 @@ Core behavior to install:
 6. Loop Execution Contract for repeated autonomous work
 7. Implementation/check/fix loop until the approved goal is reached or blocked
 8. Verifier review against the approved goal, technical plan, and loop contract
+9. Changeset Review Loop before human review
+10. Human approval
+11. Pull request creation after approval, unless skipped
 
 Important constraints:
 
@@ -53,6 +56,8 @@ Install the portable core:
 - `.agents/skills/discover-agent-skills/SKILL.md`
 - `.agents/skills/loop-orchestrator/SKILL.md`
 - `.agents/skills/anti-spin-guard/SKILL.md`
+- `.agents/skills/changeset-review-loop/SKILL.md`
+- `.agents/skills/pull-request-creator/SKILL.md`
 - `scripts/agent/check.sh`
 - `scripts/agent/find-skill.sh`
 - `docs/ai-loop.md`
@@ -63,8 +68,13 @@ If this repository uses Cursor, also install or merge:
 - `.cursor/rules/grill-before-build.mdc`
 - `.cursor/rules/plan-approval.mdc`
 - `.cursor/rules/auto-verifier.mdc`
+- `.cursor/rules/changeset-review-loop.mdc`
 - `.cursor/rules/repo-checks.mdc`
 - `.cursor/agents/verifier.md`
+- `.cursor/agents/changeset-reviewer-architecture.md`
+- `.cursor/agents/changeset-reviewer-correctness.md`
+- `.cursor/agents/changeset-reviewer-regression.md`
+- `.cursor/agents/changeset-fixer.md
 - `.cursor/skills/*`
 - `.cursor/hooks.json`
 - `scripts/cursor/check.sh`

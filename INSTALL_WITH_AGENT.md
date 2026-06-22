@@ -28,6 +28,9 @@ Core behavior to install:
 6. Loop Execution Contract for repeated autonomous work
 7. Implementation/check/fix loop until the approved goal is reached or blocked
 8. Verifier review against the approved goal, technical plan, and loop contract
+9. Changeset Review Loop before human review
+10. Human approval
+11. Pull request creation after approval, unless skipped
 
 Important constraints:
 
@@ -53,6 +56,8 @@ Install the portable core:
 - `.agents/skills/discover-agent-skills/SKILL.md`
 - `.agents/skills/loop-orchestrator/SKILL.md`
 - `.agents/skills/anti-spin-guard/SKILL.md`
+- `.agents/skills/changeset-review-loop/SKILL.md`
+- `.agents/skills/pull-request-creator/SKILL.md`
 - `scripts/agent/check.sh`
 - `scripts/agent/find-skill.sh`
 - `docs/ai-loop.md`
@@ -63,8 +68,13 @@ If this repository uses Cursor, also install or merge:
 - `.cursor/rules/grill-before-build.mdc`
 - `.cursor/rules/plan-approval.mdc`
 - `.cursor/rules/auto-verifier.mdc`
+- `.cursor/rules/changeset-review-loop.mdc`
 - `.cursor/rules/repo-checks.mdc`
 - `.cursor/agents/verifier.md`
+- `.cursor/agents/changeset-reviewer-architecture.md`
+- `.cursor/agents/changeset-reviewer-correctness.md`
+- `.cursor/agents/changeset-reviewer-regression.md`
+- `.cursor/agents/changeset-fixer.md`
 - `.cursor/skills/*`
 - `.cursor/hooks.json`
 - `scripts/cursor/check.sh`
@@ -89,7 +99,7 @@ Installation process:
 3. Merge instructions.
    - If `AGENTS.md` exists, append or merge the Agent Loop Starter section without deleting existing repo guidance.
    - Keep project-specific rules above generic agent-loop rules when they conflict.
-   - Preserve existing command lists, code style, architecture rules, and PR rules.
+   - Preserve existing command lists, code style, architecture rules, PR rules, and branch rules.
 
 4. Install skills.
    - Add missing starter skills.
@@ -104,18 +114,23 @@ Installation process:
    - Remove the placeholder unconfigured-check behavior once real checks are added.
    - Keep commands explicit.
 
-6. Make shell scripts executable:
+6. Install PR creation guidance.
+   - Preserve existing pull request rules.
+   - Configure the workflow to use `gh` or `bkt` when available.
+   - Make PR creation skippable when the user says `skip PR`, `do not create a PR`, `no PR`, or equivalent.
+
+7. Make shell scripts executable:
    - `chmod +x scripts/agent/check.sh`
    - `chmod +x scripts/agent/find-skill.sh`
    - `chmod +x scripts/cursor/check.sh`, if installed
 
-7. Verify installation.
+8. Verify installation.
    - Run `bash scripts/agent/find-skill.sh grill-me || true`.
    - Run `bash scripts/agent/check.sh`.
    - If checks fail because the project already has failing checks, report that honestly.
    - If checks are not configured, report that honestly.
 
-8. Final report.
+9. Final report.
    Include:
    - files created
    - files modified

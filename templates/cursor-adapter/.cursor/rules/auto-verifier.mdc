@@ -17,5 +17,7 @@ The verifier should confirm that:
 - pitfalls and regression risks from the plan were addressed
 - configured checks meaningfully support the approved goal
 - loop guardrails were respected when repeated iterations were used
+- the Changeset Review Loop ran before human review
+- no `CRITICAL` changeset review findings remain, or the work is marked blocked
 
 If the subagent is unavailable, use the portable verifier skill from `.agents/skills/verifier/SKILL.md`.

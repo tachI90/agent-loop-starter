@@ -19,7 +19,11 @@ Implementation / Check / Fix Loop
   ↓
 Verifier Review
   ↓
-Human Review
+Changeset Review Loop
+  ↓
+Human Review and Approval
+  ↓
+Pull Request Creation, unless skipped
 ```
 
 ## Grill Gate
@@ -79,3 +83,27 @@ The verifier checks:
 - The implementation matches the approved plan.
 - Regression risks were addressed.
 - Checks meaningfully support the approved goal.
+
+## Changeset Review Loop
+
+Before human review, run three independent changeset reviewers:
+
+1. Architecture reviewer
+2. Correctness reviewer
+3. Regression reviewer
+
+Then run a fixer pass for actionable findings.
+
+Repeat until no `CRITICAL` findings remain or three review/fix iterations have completed.
+
+If `CRITICAL` findings remain after three iterations, the work is blocked and should not be presented as ready for human approval.
+
+Remaining non-critical findings must be reported to the human reviewer.
+
+## Human approval and pull request creation
+
+After the changeset review passes, present the work for human review and approval.
+
+After human approval, create a pull request automatically unless the user asks to skip this step.
+
+Use `gh` or `bkt` when available. If neither is available, provide manual PR instructions.

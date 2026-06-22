@@ -41,6 +41,17 @@ INSTALL_WITH_AGENT.md
 prompts/install-in-existing-repo.md
 ```
 
+## Updating an existing installation
+
+If the target repository already has an older Agent Loop Starter installed, use the update prompt instead of the install prompt.
+
+```text
+UPDATE_WITH_AGENT.md
+prompts/update-existing-install.md
+```
+
+See [`docs/updating.md`](updating.md) for the full update process.
+
 ## Manual install
 
 Copy the portable core:

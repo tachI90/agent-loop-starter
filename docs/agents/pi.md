@@ -14,13 +14,39 @@ Pi-specific files include:
 .pi/skills/
 ```
 
-Recommended explicit skill usage:
+Recommended skills:
 
 ```text
-/skill:discover-agent-skills
-/skill:ai-engineering-loop
-/skill:grill-me                 # if the real upstream skill exists
-/skill:requirements-grill-lite  # fallback
-/skill:verifier
-/skill:configure-project-checks
+discover-agent-skills
+ai-engineering-loop
+grill-me, if the real upstream skill exists
+requirements-grill-lite, as fallback
+verifier
+changeset-review-loop
+pull-request-creator
+configure-project-checks
+```
+
+Pi should follow:
+
+```text
+Grill Gate
+  ↓
+Goal Contract
+  ↓
+Human Goal Approval
+  ↓
+Technical Implementation Plan
+  ↓
+Human Plan Approval
+  ↓
+Implementation Loop
+  ↓
+Verifier Review
+  ↓
+Changeset Review Loop
+  ↓
+Human Review and Approval
+  ↓
+Pull Request Creation, unless skipped
 ```

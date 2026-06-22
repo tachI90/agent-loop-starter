@@ -12,6 +12,8 @@ If you do something hard once, turn the successful method into a named skill.
 - goal writing
 - technical planning
 - verifier review
+- changeset review
+- pull request creation
 - migration planning
 - UI prototype parity checks
 - API contract review

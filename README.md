@@ -21,20 +21,26 @@ Implementation / Check / Fix Loop
   ↓
 Verifier Review
   ↓
-Human Review
+Changeset Review Loop
+  ↓
+Human Review and Approval
+  ↓
+Pull Request Creation, unless skipped
 ```
 
 ## What this gives you
 
 - A portable `AGENTS.md` workflow.
 - Reusable Agent Skills.
-- Cursor rules, skills, hooks, and verifier subagent.
+- Cursor rules, skills, hooks, verifier subagent, changeset reviewer subagents, and fixer subagent.
 - Pi-compatible skills/settings.
 - Codex-compatible `.agents/skills` structure.
 - A project-specific verification scaffold.
 - A helper to discover whether the real `grill-me` skill exists globally or in project scope.
 - A loop guardrail model with iteration caps, budgets, no-progress detection, and escalation.
 - A durable loop-state template so long-running work can resume after interruption.
+- A pre-human-review Changeset Review Loop with three reviewer perspectives and a fixer pass.
+- Optional post-approval pull request creation with `gh` or `bkt`.
 - Clear install prompts for agents.
 
 ## Core principles
@@ -69,6 +75,10 @@ The loop does not end because code changed or tests passed. It ends when the app
 
 The verifier checks the approved Goal Contract and Technical Implementation Plan, not just the code diff.
 
+### 5.5 Review the changeset before human review
+
+Before final human review, three independent changeset reviewers inspect the diff: Architecture, Correctness, and Regression. A fixer pass addresses findings. The loop repeats until no `CRITICAL` findings remain or three iterations are reached.
+
 
 ### 6. Bound the loop
 
@@ -81,7 +91,11 @@ Any autonomous or repeated loop needs explicit stops:
 - budget ceiling
 - human escalation path
 
-### 7. Treat skills as the reusable unit
+### 7. Create the pull request after approval
+
+After human approval, the agent should create a pull request automatically with `gh` or `bkt` when available. This step is skipped when the user asks to skip PR creation.
+
+### 8. Treat skills as the reusable unit
 
 The loop is orchestration. The reusable asset is the named skill it calls. Hard things should become skills after they are solved once.
 
@@ -102,6 +116,8 @@ The loop is orchestration. The reusable asset is the named skill it calls. Hard 
 │   ├── workflow.md
 │   ├── loop-patterns.md
 │   ├── loop-guardrails.md
+│   ├── changeset-review-loop.md
+│   ├── pull-request-creation.md
 │   ├── skill-library.md
 │   └── agents/
 │       ├── codex.md
@@ -111,10 +127,11 @@ The loop is orchestration. The reusable asset is the named skill it calls. Hard 
 │   ├── generic-install.md
 │   ├── codex-install.md
 │   ├── cursor-install.md
-│   └── pi-install.md
+│   ├── pi-install.md
+│   ├── install-in-existing-repo.md
+│   └── update-existing-install.md
 ├── INSTALL_WITH_AGENT.md
-├── prompts/
-│   └── install-in-existing-repo.md
+├── UPDATE_WITH_AGENT.md
 └── templates/
     ├── portable-core/
     │   ├── AGENTS.md
@@ -159,6 +176,31 @@ prompts/install-in-existing-repo.md
 
 `check.sh` is intentionally a scaffold. The installing agent should inspect the target repo and configure `scripts/agent/check.sh` with real commands.
 
+## Update an existing installation
+
+Use an agent to update repos that already have an older Agent Loop Starter installed. This lets the agent preserve local customizations while adding new workflow pieces.
+
+Open the target repo in your coding agent and give it this prompt:
+
+```text
+Update the existing Agent Loop Starter installation in this repository.
+
+Use the update instructions from:
+UPDATE_WITH_AGENT.md
+
+Preserve local project-specific guidance and check commands.
+Do not overwrite grill-me.
+Add missing latest skills, rules, docs, and subagents.
+Merge changes carefully and report conflicts.
+```
+
+The full update prompt lives in:
+
+```text
+UPDATE_WITH_AGENT.md
+prompts/update-existing-install.md
+```
+
 ## Install manually
 
 Copy this into your target repo:
@@ -193,6 +235,11 @@ Use the main installer prompt:
 
 - [`INSTALL_WITH_AGENT.md`](INSTALL_WITH_AGENT.md)
 - [`prompts/install-in-existing-repo.md`](prompts/install-in-existing-repo.md)
+
+For updating an existing installation:
+
+- [`UPDATE_WITH_AGENT.md`](UPDATE_WITH_AGENT.md)
+- [`prompts/update-existing-install.md`](prompts/update-existing-install.md)
 
 Agent-specific variants are also available:
 
